@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CheckboxesTest extends BaseTest{
 
     @Test
-    public void checkbox1_CheckUncheck() {
+    public void checkboxes_CheckUncheck() {
         CheckboxesPage checkboxPage = new TheInternetHomePage(getDriver())
                 .checkboxesPageLinkClick();
 
