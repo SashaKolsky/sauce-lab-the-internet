@@ -4,6 +4,7 @@ import com.dotdash.takehome.pages.TheInternetHomePage;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
+import static com.dotdash.takehome.utils.Utils.takeScreenshot;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FormAuthenticationTest extends BaseTest{
@@ -15,6 +16,11 @@ public class FormAuthenticationTest extends BaseTest{
                 .login("tomsmith", "SuperSecretPassword!");
 
         assertThat(getDriver().getCurrentUrl()).contains("secure");
+
+        String status = takeScreenshot(getDriver(), "login_withValidCredentials");
+        if (!status.isEmpty()) {
+            log.atError().log(status);
+        }
     }
 
     @Test
