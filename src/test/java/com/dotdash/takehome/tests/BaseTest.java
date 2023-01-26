@@ -1,9 +1,10 @@
 package com.dotdash.takehome.tests;
 
 import com.dotdash.takehome.pages.TheInternetHomePage;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -27,15 +28,16 @@ public abstract class BaseTest {
     }
 
     @BeforeEach
-    public void setup() {
-        driver = new ChromeDriver();
-        driver.manage().window().setSize(new Dimension(800,600));
+    protected void setup() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless", "--window-size=1920,1200");
+        driver = new ChromeDriver(options);
 
         driver.navigate().to(TheInternetHomePage.PAGE_URL);
     }
 
     @AfterEach
-    public void teardown() {
+    protected void teardown() {
         if (null != driver) {
             driver.close();
             driver.quit();
