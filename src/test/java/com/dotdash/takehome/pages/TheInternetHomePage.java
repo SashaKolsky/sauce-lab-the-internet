@@ -15,6 +15,9 @@ public class TheInternetHomePage extends BasePage {
     @FindBy(partialLinkText = "Checkboxes")
     WebElement checkboxesPageLink;
 
+    @FindBy(partialLinkText = "Context Menu")
+    WebElement contextMenuPageLink;
+
     public TheInternetHomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -30,5 +33,9 @@ public class TheInternetHomePage extends BasePage {
         return new CheckboxesPage(driver);
     }
 
+    public ContextMenuPage contextMenuClick() {
+        contextMenuPageLink.click();
+        return new ContextMenuPage(driver);
+    }
 
 }
