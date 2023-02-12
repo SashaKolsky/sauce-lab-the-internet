@@ -11,7 +11,7 @@ public class ContextMenuPage extends BasePage {
     public static final String PAGE_URL = "http://localhost:7080/context_menu";
 
     @FindBy(id = "hot-spot")
-    WebElement hotSpot;
+    private WebElement hotSpot;
 
     public ContextMenuPage(WebDriver driver) {
         super(driver);
