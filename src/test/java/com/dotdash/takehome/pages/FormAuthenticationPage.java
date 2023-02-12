@@ -11,8 +11,12 @@ public class FormAuthenticationPage extends BasePage {
 
     WebElement username;
     WebElement password;
+
     @FindBy(xpath = "//button[@type='submit']")
     WebElement submit;
+
+    @FindBy(id = "flash")
+    WebElement flashMessage;
 
     public FormAuthenticationPage(WebDriver driver) {
         super(driver);
@@ -23,5 +27,17 @@ public class FormAuthenticationPage extends BasePage {
         username.sendKeys(userName);
         password.sendKeys(pwd);
         submit.click();
+    }
+
+    public FormAuthenticationPage loginNegative(String userName, String pwd) {
+        username.sendKeys(userName);
+        password.sendKeys(pwd);
+        submit.click();
+
+        return this;
+    }
+
+    public String flashMessage_getText() {
+        return flashMessage.getText();
     }
 }
