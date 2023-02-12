@@ -33,6 +33,11 @@ public class TheInternetHomePage extends BasePage {
         return new CheckboxesPage(driver);
     }
 
+    public CheckboxesPageAlternative altCheckboxesPageLinkClick(){
+        checkboxesPageLink.click();
+        return new CheckboxesPageAlternative(driver);
+    }
+
     public ContextMenuPage contextMenuClick() {
         contextMenuPageLink.click();
         return new ContextMenuPage(driver);
