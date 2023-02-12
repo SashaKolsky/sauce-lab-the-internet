@@ -13,7 +13,7 @@ public class ContextMenuTest extends BaseTest{
             .contextMenuClick()
             .hotSpotRightClick();
 
-        assertThat("You selected a context menu").contains(getDriver().switchTo().alert().getText());
+        assertThat(getDriver().switchTo().alert().getText()).contains("You selected a context menu");
         getDriver().switchTo().alert().dismiss();
     }
 
