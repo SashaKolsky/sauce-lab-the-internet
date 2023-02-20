@@ -10,45 +10,37 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 
-import java.util.concurrent.TimeUnit;
-
 import static java.lang.invoke.MethodHandles.lookup;
 import static org.slf4j.LoggerFactory.getLogger;
 
 public abstract class BaseTest {
 
     static final Logger log = getLogger(lookup().lookupClass());
-    private WebDriver driver;
-    static private long startTime;
-    static private long endTime;
+    static WebDriver driver;
 
     @BeforeAll
     static void beforeClass() {
-        startTime = System.nanoTime();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless", "--window-size=1920,1200");
+        //options.addArguments("--window-size=1240,1200");
+        driver = new ChromeDriver(options);
     }
 
     @BeforeEach
     protected void setup() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless", "--window-size=1920,1200");
-        driver = new ChromeDriver(options);
-
         driver.navigate().to(TheInternetHomePage.PAGE_URL);
     }
 
     @AfterEach
     protected void teardown() {
-        if (null != driver) {
-            driver.close();
-            driver.quit();
-        }
     }
 
     @AfterAll
     static void afterClass() {
-        endTime = System.nanoTime();
-        long runtime = TimeUnit.NANOSECONDS.toSeconds(endTime - startTime);
-        log.atInfo().log("Runtime for all tests in class: "+ runtime);
+        if (null != driver) {
+            driver.close();
+            driver.quit();
+        }
     }
 
     protected WebDriver getDriver() {
