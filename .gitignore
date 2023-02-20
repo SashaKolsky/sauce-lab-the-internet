@@ -40,5 +40,4 @@ build/
 ### Other ###
 .idea/
 src/main/
-src/test/java/TrainingTest.java
-src/test/java/com/dotdash/takehome/tests/UsingTheInternetHome.java
+src/test/java/otherPractice/*
