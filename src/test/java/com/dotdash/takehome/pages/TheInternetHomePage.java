@@ -18,6 +18,15 @@ public class TheInternetHomePage extends BasePage {
     @FindBy(partialLinkText = "Context Menu")
     WebElement contextMenuPageLink;
 
+    @FindBy(partialLinkText = "Drag and Drop")
+    WebElement dragAndDropLink;
+
+    @FindBy(partialLinkText = "Dropdown")
+    WebElement dropdownLink;
+
+    @FindBy(partialLinkText = "Dynamic Content")
+    WebElement dynamicContentLink;
+
     public TheInternetHomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -41,6 +50,21 @@ public class TheInternetHomePage extends BasePage {
     public ContextMenuPage contextMenuClick() {
         contextMenuPageLink.click();
         return new ContextMenuPage(driver);
+    }
+
+    public DragAndDropPage dragAndDropClick() {
+        dragAndDropLink.click();
+        return new DragAndDropPage(driver);
+    }
+
+    public DropdownPage dropdownClick() {
+        dropdownLink.click();
+        return new DropdownPage(driver);
+    }
+
+    public DynamicContentPage dynamicContentClick() {
+        dynamicContentLink.click();
+        return new DynamicContentPage(driver);
     }
 
 }
