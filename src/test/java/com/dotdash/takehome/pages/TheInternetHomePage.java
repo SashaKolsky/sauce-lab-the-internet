@@ -27,6 +27,9 @@ public class TheInternetHomePage extends BasePage {
     @FindBy(partialLinkText = "Dynamic Content")
     WebElement dynamicContentLink;
 
+    @FindBy(partialLinkText = "Dynamic Controls")
+    WebElement dynamicControlsLink;
+
     public TheInternetHomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -65,6 +68,11 @@ public class TheInternetHomePage extends BasePage {
     public DynamicContentPage dynamicContentClick() {
         dynamicContentLink.click();
         return new DynamicContentPage(driver);
+    }
+
+    public DynamicControlsPage dynamicControlsClick() {
+        dynamicControlsLink.click();
+        return new DynamicControlsPage(driver);
     }
 
 }
