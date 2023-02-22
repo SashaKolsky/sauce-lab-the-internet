@@ -30,6 +30,12 @@ public class TheInternetHomePage extends BasePage {
     @FindBy(partialLinkText = "Dynamic Controls")
     WebElement dynamicControlsLink;
 
+    @FindBy(partialLinkText = "Dynamic Loading")
+    WebElement dynamicLoadingLink;
+
+    @FindBy(partialLinkText = "File Download")
+    WebElement fileDownloadLink;
+
     public TheInternetHomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -73,6 +79,16 @@ public class TheInternetHomePage extends BasePage {
     public DynamicControlsPage dynamicControlsClick() {
         dynamicControlsLink.click();
         return new DynamicControlsPage(driver);
+    }
+
+    public DynamicLoadingPage dynamicLoadingClick() {
+        dynamicLoadingLink.click();
+        return new DynamicLoadingPage(driver);
+    }
+
+    public FileDownloadPage fileDownloadLinkClick() {
+        fileDownloadLink.click();
+        return new FileDownloadPage(driver);
     }
 
 }
