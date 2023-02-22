@@ -1,6 +1,11 @@
 package com.dotdash.takehome.utils;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.classic.methods.HttpUriRequestBase;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -67,6 +72,17 @@ public class Utils {
         }
 
         return contents.toString();
+    }
+
+
+
+    public static void fileDownloader(String link, File destination) throws IOException {
+        try (CloseableHttpClient client = HttpClientBuilder.create().build()) {
+            HttpUriRequestBase request = new HttpGet(link);
+            try (CloseableHttpResponse response = client.execute(request)) {
+                FileUtils.copyInputStreamToFile(response.getEntity().getContent(), destination);
+            }
+        }
     }
 
 }
