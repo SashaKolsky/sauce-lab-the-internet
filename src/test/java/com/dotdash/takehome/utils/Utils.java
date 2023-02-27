@@ -90,4 +90,37 @@ public class Utils {
         }
     }
 
+
+    public static boolean waitForElementVPositionToBeInRange(
+            WebElement element,
+            int expected,
+            int offset,
+            int timeout) {
+        int counter = 0;
+        int actual;
+        do {
+            actual = element.getLocation().getY();
+            if (Math.abs(actual - expected) <= offset) {
+                return true;
+            }
+            counter++;
+        } while (counter <= timeout);
+        return false;
+    }
+
+    public static void mouseMoveToConsoleJS(WebDriver driver) {
+
+        ((JavascriptExecutor) driver).executeScript("""
+                window.addEventListener('mousemove', mouseCoordinates);
+                function mouseCoordinates(event){
+                    console.log("pageX: ", event.pageX,
+                        "pageY: ", event.pageY,
+                        "clientX: ", event.clientX,
+                        "clientY:", event.clientY
+                    );
+                }
+                """
+        );
+    }
+
 }

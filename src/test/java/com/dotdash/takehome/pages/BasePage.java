@@ -1,5 +1,6 @@
 package com.dotdash.takehome.pages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,7 +11,7 @@ import java.time.Duration;
 public class BasePage {
 
     protected WebDriver driver;
-    private static final int TIMEOUT = 5;
+    private static final int TIMEOUT = 7;
     private static final int POLLING = 100;
     private static WebDriverWait wait;
 
@@ -29,5 +30,11 @@ public class BasePage {
 
     protected void waitForElementToDisappear(WebElement element) {
         wait.until(ExpectedConditions.invisibilityOf(element));
+    }
+
+    protected void jsScroll(int to) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        String jsScript = String.format("window.scrollTo(0, %d);", to);
+        js.executeScript(jsScript);
     }
 }
