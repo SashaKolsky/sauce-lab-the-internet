@@ -6,9 +6,7 @@ import org.apache.hc.client5.http.classic.methods.HttpUriRequestBase;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 
 import java.io.*;
 import java.net.URI;
@@ -74,6 +72,13 @@ public class Utils {
         return contents.toString();
     }
 
+    public static File createTempFile(String tempfile) throws IOException {
+        File file = File.createTempFile(tempfile, null);
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        writer.write("Temp file input");
+        writer.close();
+        return file;
+    }
 
 
     public static void fileDownloader(String link, File destination) throws IOException {

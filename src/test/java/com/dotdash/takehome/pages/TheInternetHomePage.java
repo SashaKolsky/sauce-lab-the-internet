@@ -36,6 +36,18 @@ public class TheInternetHomePage extends BasePage {
     @FindBy(partialLinkText = "File Download")
     WebElement fileDownloadLink;
 
+    @FindBy(partialLinkText = "File Upload")
+    WebElement fileUploadLink;
+
+    @FindBy(partialLinkText = "Floating Menu")
+    WebElement floatingMenuLink;
+
+    @FindBy(partialLinkText = "Frames")
+    WebElement framesLink;
+
+    @FindBy(partialLinkText = "iFrame")
+    WebElement iFrameLink;
+
     public TheInternetHomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -89,6 +101,22 @@ public class TheInternetHomePage extends BasePage {
     public FileDownloadPage fileDownloadLinkClick() {
         fileDownloadLink.click();
         return new FileDownloadPage(driver);
+    }
+
+    public FileUploadPage fileUploadLinkClick() {
+        fileUploadLink.click();
+        return new FileUploadPage(driver);
+    }
+
+    public FloatingMenuPage floatingMenuLinkClick() {
+        floatingMenuLink.click();
+        return new FloatingMenuPage(driver);
+    }
+
+    public IframePage iFrameLinkClick() {
+        framesLink.click();
+        iFrameLink.click();
+        return new IframePage(driver);
     }
 
 }
