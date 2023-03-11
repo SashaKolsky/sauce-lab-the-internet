@@ -41,3 +41,5 @@ build/
 .idea/
 src/main/
 src/test/java/otherPractice/*
+allure-results/
+output/
