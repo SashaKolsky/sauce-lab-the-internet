@@ -1,5 +1,6 @@
 package com.dotdash.takehome.tests;
 
+import com.dotdash.takehome.pages.ContextMenuPage;
 import com.dotdash.takehome.pages.TheInternetHomePage;
 import org.junit.jupiter.api.Test;
 
@@ -9,12 +10,12 @@ public class ContextMenuTest extends BaseTest{
 
     @Test
     public void contextMenu_click() {
-        new TheInternetHomePage(getDriver())
-            .contextMenuClick()
-            .hotSpotRightClick();
+        ContextMenuPage contextMenuPage = new TheInternetHomePage(getDriver())
+                .contextMenuClick()
+                .hotSpotRightClick();
 
-        assertThat(getDriver().switchTo().alert().getText()).contains("You selected a context menu");
-        getDriver().switchTo().alert().dismiss();
+        assertThat(contextMenuPage.getAlertText()).contains("You selected a context menu");
+        //contextMenuPage.closePopups();
     }
 
 }
