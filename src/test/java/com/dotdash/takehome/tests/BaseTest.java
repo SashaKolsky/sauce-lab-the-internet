@@ -21,8 +21,9 @@ public abstract class BaseTest {
     @BeforeAll
     static void beforeClass() {
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        //options.addArguments("--window-size=1200,1200");
         options.addArguments("--headless", "--window-size=1920,1200");
-        //options.addArguments("--window-size=1240,1200");
         driver = new ChromeDriver(options);
     }
 
