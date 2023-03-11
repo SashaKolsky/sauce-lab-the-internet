@@ -48,6 +48,9 @@ public class TheInternetHomePage extends BasePage {
     @FindBy(partialLinkText = "iFrame")
     WebElement iFrameLink;
 
+    @FindBy(partialLinkText = "Hovers")
+    WebElement hoversLink;
+
     public TheInternetHomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -117,6 +120,11 @@ public class TheInternetHomePage extends BasePage {
         framesLink.click();
         iFrameLink.click();
         return new IframePage(driver);
+    }
+
+    public HoversPage hoversLinkClick() {
+        hoversLink.click();
+        return new HoversPage(driver);
     }
 
 }
