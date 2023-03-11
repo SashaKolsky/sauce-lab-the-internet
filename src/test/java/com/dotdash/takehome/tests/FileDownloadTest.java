@@ -28,6 +28,7 @@ public class FileDownloadTest extends BaseTest{
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("download.default_directory", targetFolder.toString());
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
         options.addArguments("--headless=new", "--window-size=1240,1200");
         options.setExperimentalOption("prefs", prefs);
         driver = new ChromeDriver(options);
