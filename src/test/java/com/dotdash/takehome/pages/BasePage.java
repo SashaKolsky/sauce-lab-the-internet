@@ -1,5 +1,6 @@
 package com.dotdash.takehome.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class BasePage {
 
@@ -36,5 +38,17 @@ public class BasePage {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         String jsScript = String.format("window.scrollTo(0, %d);", to);
         js.executeScript(jsScript);
+    }
+
+    protected boolean isElementNotPresent(String locatorType, String locatorString) {
+        By locator;
+        if (locatorType.equalsIgnoreCase("css")) {
+            locator = By.cssSelector(locatorString);
+        } else {
+            locator = By.xpath(locatorString);
+        }
+        List<WebElement> elements = driver.findElements(locator);
+
+        return elements.size() == 0 || !elements.get(0).isDisplayed();
     }
 }
