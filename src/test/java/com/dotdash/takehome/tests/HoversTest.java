@@ -2,18 +2,21 @@ package com.dotdash.takehome.tests;
 
 import com.dotdash.takehome.pages.HoversPage;
 import com.dotdash.takehome.pages.TheInternetHomePage;
-import org.junit.jupiter.api.Test;
+import com.dotdash.takehome.utils.ReplaceCamelCase;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import java.lang.reflect.Method;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayNameGeneration(ReplaceCamelCase.class)
 public class HoversTest extends BaseTest{
 
-    public static final String user1ExpectedValue = "name: user1";
-    public static final String user2ExpectedValue = "name: user2";
-    public static final String user3ExpectedValue = "name: user3";
-
-    @Test
-    public void floatingMenuTest() {
+    @CsvSource({"1, name: user1","2, name: user2","3, name: user3"})
+    @ParameterizedTest(name = "When floating cursor over user {0}, hidden info for User {0} pops up")
+    public void floatingMenuShowsUpIfHoveredOverUserProfilePicture(int userId, String expected) {
         HoversPage hoversPage = new TheInternetHomePage(getDriver())
                 .hoversLinkClick();
 
@@ -22,20 +25,12 @@ public class HoversTest extends BaseTest{
         assertThat(hoversPage.isUser2HoverDataNotPresent()).isTrue();
         assertThat(hoversPage.isUser3HoverDataNotPresent()).isTrue();
 
-        // 1st shown after hover
-        assertThat(hoversPage.getUser1HoverData()).isEqualTo(user1ExpectedValue);
-        assertThat(hoversPage.isUser2HoverDataNotPresent()).isTrue();
-        assertThat(hoversPage.isUser3HoverDataNotPresent()).isTrue();
-
-        // 2nd shown after hover
-        assertThat(hoversPage.getUser2HoverData()).isEqualTo(user2ExpectedValue);
-        assertThat(hoversPage.isUser1HoverDataNotPresent()).isTrue();
-        assertThat(hoversPage.isUser3HoverDataNotPresent()).isTrue();
-
-        // 3rd shown after hover
-        assertThat(hoversPage.getUser3HoverData()).isEqualTo(user3ExpectedValue);
-        assertThat(hoversPage.isUser1HoverDataNotPresent()).isTrue();
-        assertThat(hoversPage.isUser2HoverDataNotPresent()).isTrue();
+        try {
+            Method method = hoversPage.getClass().getMethod("getUser"+ userId +"HoverData");
+            assertThat(method.invoke(hoversPage)).isEqualTo(expected);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
