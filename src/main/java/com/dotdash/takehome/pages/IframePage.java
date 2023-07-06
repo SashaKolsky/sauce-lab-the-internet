@@ -8,7 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 public class IframePage extends BasePage {
 
     public static final String PAGE_URL = "http://localhost:7080/iframe";
-    private static int counter = 0;
 
     @FindBy(xpath = "//html[1]")
     private WebElement mainPage;
@@ -59,12 +58,7 @@ public class IframePage extends BasePage {
     }
 
     public WebElement getTextEditor() {
-//        try {
-//            textEditor.getText();
-//        } catch (NoSuchElementException e) {
-            switchToIFrame();
-//            System.out.printf("%d WRONG FRAME\n", ++counter);
-//        }
+        waitForTextEditorToLoad();
         return textEditor;
     }
 
