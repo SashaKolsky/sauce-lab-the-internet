@@ -4,7 +4,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.classic.methods.HttpUriRequestBase;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.openqa.selenium.*;
 
@@ -84,9 +83,10 @@ public class Utils {
     public static void fileDownloader(String link, File destination) throws IOException {
         try (CloseableHttpClient client = HttpClientBuilder.create().build()) {
             HttpUriRequestBase request = new HttpGet(link);
-            try (CloseableHttpResponse response = client.execute(request)) {
-                FileUtils.copyInputStreamToFile(response.getEntity().getContent(), destination);
-            }
+            client.execute(request, classicHttpResponse -> {
+                FileUtils.copyInputStreamToFile(classicHttpResponse.getEntity().getContent(), destination);
+                return null;
+            });
         }
     }
 
