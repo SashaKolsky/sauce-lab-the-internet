@@ -7,8 +7,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 import java.util.List;
+
+import static com.dotdash.takehome.utils.Utils.getProjectProperty;
 
 public class BasePage {
 
@@ -16,6 +20,20 @@ public class BasePage {
     private static final int TIMEOUT = 7;
     private static final int POLLING = 100;
     private static WebDriverWait wait;
+
+    public static final URL BASE_URL;
+    static {
+        try {
+            String hostname = getProjectProperty("hostname");
+            String port = (getProjectProperty("port").trim().length() > 0)
+                    ? ":"+ getProjectProperty("port")
+                    : "";
+            String url = String.join("", "http://", hostname, port);
+            BASE_URL = new URL(url);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
