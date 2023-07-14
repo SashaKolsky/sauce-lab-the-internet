@@ -2,12 +2,15 @@ package com.dotdash.takehome.tests;
 
 import com.dotdash.takehome.pages.IframePage;
 import com.dotdash.takehome.pages.TheInternetHomePage;
+import com.dotdash.takehome.utils.AfterTestCallback;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ExtendWith(AfterTestCallback.class)
 public class IframeTest extends BaseTest {
 
     @Test
@@ -16,7 +19,7 @@ public class IframeTest extends BaseTest {
         String partText = "bold";
 
         IframePage iframePage = new TheInternetHomePage(getDriver())
-                .iFrameLinkClick()
+                .wysiwygLinkClick()
                 .prepTextEditor()
                 .enterText(text)
                 .selectPartOfText(partText)
@@ -34,7 +37,7 @@ public class IframeTest extends BaseTest {
         String partText = "italic";
 
         IframePage iframePage = new TheInternetHomePage(getDriver())
-                .iFrameLinkClick()
+                .wysiwygLinkClick()
                 .prepTextEditor()
                 .enterText(text)
                 .selectPartOfText(partText)
@@ -42,11 +45,10 @@ public class IframeTest extends BaseTest {
 
         String verifyXpathTag = "em";
         String verifyXpath = String.format("//%s[contains(.,'%s')]", verifyXpathTag, partText);
+
         int actual = iframePage.getTextEditor().findElements(By.xpath(verifyXpath)).size();
-        assertThat(actual).isEqualTo(1);
+        assertThat(actual).withFailMessage("No <em> elements found in text").isEqualTo(1);
     }
-
-
 
     @Test
     public void textEditorTestBoldThenItalicButton() {
@@ -54,7 +56,7 @@ public class IframeTest extends BaseTest {
         String partText = "bold";
 
         IframePage iframePage = new TheInternetHomePage(getDriver())
-                .iFrameLinkClick()
+                .wysiwygLinkClick()
                 .prepTextEditor()
                 .enterText(text)
                 .selectPartOfText(partText)
@@ -79,7 +81,7 @@ public class IframeTest extends BaseTest {
         String partText = "bold and italic";
 
         IframePage iframePage = new TheInternetHomePage(getDriver())
-                .iFrameLinkClick()
+                .wysiwygLinkClick()
                 .prepTextEditor()
                 .enterText(text)
                 .selectPartOfText(partText)
@@ -88,12 +90,15 @@ public class IframeTest extends BaseTest {
 
         String verifyXpathTag1 = "em";
         String verifyXpath1 = String.format("//%s[contains(.,'%s')]", verifyXpathTag1, partText);
+
         String verifyXpathTag2 = "strong";
         String verifyXpath2 = String.format("//%s[contains(.,'%s')]", verifyXpathTag2, partText);
+
         int actual = iframePage.getTextEditor()
                 .findElement(By.xpath(verifyXpath1))
                 .findElements(By.xpath(verifyXpath2))
                 .size();
+
         assertThat(actual).isEqualTo(1);
     }
 
@@ -103,7 +108,7 @@ public class IframeTest extends BaseTest {
         String partText = "header";
 
         IframePage iframePage = new TheInternetHomePage(getDriver())
-                .iFrameLinkClick()
+                .wysiwygLinkClick()
                 .prepTextEditor()
                 .enterText(text)
                 .selectPartOfText(partText)
@@ -124,7 +129,7 @@ public class IframeTest extends BaseTest {
         String partText = "alignment";
 
         IframePage iframePage = new TheInternetHomePage(getDriver())
-                .iFrameLinkClick()
+                .wysiwygLinkClick()
                 .prepTextEditor()
                 .enterText(text)
                 .selectPartOfText(partText)

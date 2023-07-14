@@ -1,11 +1,14 @@
 package com.dotdash.takehome.tests;
 
 import com.dotdash.takehome.pages.TheInternetHomePage;
+import com.dotdash.takehome.utils.AfterTestCallback;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-import static com.dotdash.takehome.utils.Utils.takeScreenshot;
 import static org.assertj.core.api.Assertions.assertThat;
 
+
+@ExtendWith(AfterTestCallback.class)
 public class FormAuthenticationTest extends BaseTest{
 
     @Test
@@ -15,11 +18,6 @@ public class FormAuthenticationTest extends BaseTest{
                 .login("tomsmith", "SuperSecretPassword!");
 
         assertThat(getDriver().getCurrentUrl()).contains("secure");
-
-        String status = takeScreenshot(getDriver(), "login_withValidCredentials");
-        if (!status.isEmpty()) {
-            log.atError().log(status);
-        }
     }
 
     @Test

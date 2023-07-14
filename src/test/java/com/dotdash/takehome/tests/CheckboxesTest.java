@@ -1,18 +1,24 @@
 package com.dotdash.takehome.tests;
 
-import com.dotdash.takehome.pages.CheckboxesPage;
-import com.dotdash.takehome.pages.CheckboxesPageAlternative;
+import com.dotdash.takehome.pages.CheckboxesAsListPage;
+import com.dotdash.takehome.pages.CheckboxesWithUpwardXPathPage;
 import com.dotdash.takehome.pages.TheInternetHomePage;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Tag("simple")
+@DisplayName("Checkboxes page: /checkboxes")
 public class CheckboxesTest extends BaseTest{
 
     @Test
-    public void checkboxes_CheckUncheck() {
-        CheckboxesPage checkboxPage = new TheInternetHomePage(getDriver())
-                .checkboxesPageLinkClick();
+    @DisplayName("Verify checkboxes with list check and uncheck properly")
+    void verifyCheckboxesWithListCheckAndUncheckProperly() {
+        CheckboxesAsListPage checkboxPage =
+                new TheInternetHomePage(getDriver())
+                        .checkboxesPageLinkClick();
 
         int numberOfCheckboxes = checkboxPage.numberOfCheckboxes();
         for(int i = 0; i < numberOfCheckboxes; i++) {
@@ -33,10 +39,13 @@ public class CheckboxesTest extends BaseTest{
         }
     }
 
+
     @Test
-    public void checkboxesAlternative_checkUncheck() {
-        CheckboxesPageAlternative checkboxPage = new TheInternetHomePage(getDriver())
-                .altCheckboxesPageLinkClick();
+    @DisplayName("Verify checkboxes with upward xpath check and uncheck properly")
+    void verifyCheckboxesWithUpwardXpathCheckAndUncheckProperly() {
+        CheckboxesWithUpwardXPathPage checkboxPage =
+                new TheInternetHomePage(getDriver())
+                        .altCheckboxesPageLinkClick();
 
         boolean checkbox1Status = checkboxPage.getCheckbox1Status();
         boolean checkbox2Status = checkboxPage.getCheckbox2Status();

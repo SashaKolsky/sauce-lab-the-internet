@@ -27,7 +27,8 @@ public class HoversTest extends BaseTest{
 
         try {
             Method method = hoversPage.getClass().getMethod("getUser"+ userId +"HoverData");
-            assertThat(method.invoke(hoversPage)).isEqualTo(expected);
+            String actual = (String) method.invoke(hoversPage);
+            assertThat(actual).isEqualTo(expected);
         } catch (Exception e) {
             e.printStackTrace();
         }

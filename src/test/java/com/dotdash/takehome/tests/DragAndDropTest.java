@@ -3,6 +3,7 @@ package com.dotdash.takehome.tests;
 import com.dotdash.takehome.pages.DragAndDropPage;
 import com.dotdash.takehome.pages.TheInternetHomePage;
 import com.dotdash.takehome.utils.Utils;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.JavascriptExecutor;
 
@@ -11,8 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DragAndDropTest extends BaseTest{
 
     @Test
-    public void dragAndDropTitle_check() {
-
+    @DisplayName("verifyContentSwitchesOnDropBothWays")
+    void verifyContentSwitchesOnDropBothWays() {
         DragAndDropPage dndPage;
         dndPage = new TheInternetHomePage(getDriver()).dragAndDropClick();
 
