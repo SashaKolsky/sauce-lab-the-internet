@@ -12,6 +12,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Properties;
 
 public class Utils {
 
@@ -121,6 +122,25 @@ public class Utils {
                 }
                 """
         );
+    }
+
+    public static String getProjectProperty(String propertyName) {
+        Properties properties = System.getProperties();
+
+        String property = properties.getProperty(propertyName);
+        if (property != null)
+            return property;
+
+        try {
+            properties.load(Utils.class.getClassLoader().getResourceAsStream("project.properties"));
+            property = System.getProperty(propertyName);
+            if (property != null)
+                return property;
+            else
+                throw new IOException("Property with name: " + propertyName + " not found.");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
