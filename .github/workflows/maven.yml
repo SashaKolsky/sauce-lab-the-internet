@@ -15,7 +15,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  run_modified_test_files_only:
+  build:
 
     runs-on: ubuntu-latest
 
@@ -32,6 +32,7 @@ jobs:
     - name: Print all modified test files
       run: git diff --name-only --diff-filter=ACMRT | grep src/test | grep -v -E "resources|pages" |  awk -F'/' '{print $NF}' | xargs | awk '{gsub(/ /,",")}1'
 
+    - name: Install chrome browser with Github Action
     - uses: browser-actions/setup-chrome@v1
 
     - name: Build with Maven and Run only changed test files
