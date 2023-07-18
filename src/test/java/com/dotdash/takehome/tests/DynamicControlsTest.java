@@ -1,5 +1,6 @@
 package com.dotdash.takehome.tests;
 
+import com.dotdash.takehome.base.BaseTest;
 import com.dotdash.takehome.pages.DynamicControlsPage;
 import com.dotdash.takehome.pages.TheInternetHomePage;
 import org.junit.jupiter.api.Assertions;
@@ -11,7 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @DisplayName("Dynamic Controls page: /dynamic_controls")
-public class DynamicControlsTest extends BaseTest{
+public class DynamicControlsTest extends BaseTest {
 
     @Test
     @DisplayName("Verify checkbox disappears and reappears upon clicking on remove add button")

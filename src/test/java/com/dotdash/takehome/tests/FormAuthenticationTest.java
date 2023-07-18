@@ -1,5 +1,6 @@
 package com.dotdash.takehome.tests;
 
+import com.dotdash.takehome.base.BaseTest;
 import com.dotdash.takehome.pages.TheInternetHomePage;
 import com.dotdash.takehome.utils.AfterTestCallback;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 @ExtendWith(AfterTestCallback.class)
-public class FormAuthenticationTest extends BaseTest{
+public class FormAuthenticationTest extends BaseTest {
 
     @Test
     public void login_withValidCredentials() {

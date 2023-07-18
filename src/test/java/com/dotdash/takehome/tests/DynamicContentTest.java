@@ -1,5 +1,6 @@
 package com.dotdash.takehome.tests;
 
+import com.dotdash.takehome.base.BaseTest;
 import com.dotdash.takehome.pages.DynamicContentPage;
 import com.dotdash.takehome.pages.TheInternetHomePage;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Dynamic Content page: /dynamic_content")
-public class DynamicContentTest extends BaseTest{
+public class DynamicContentTest extends BaseTest {
 
     static final int POSSIBLE_RETRIES_OF_IMAGE_ERROR = 5;
     static int attemptsCounter = POSSIBLE_RETRIES_OF_IMAGE_ERROR;

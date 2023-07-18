@@ -1,4 +1,4 @@
-package com.dotdash.takehome.pages;
+package com.dotdash.takehome.base;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;

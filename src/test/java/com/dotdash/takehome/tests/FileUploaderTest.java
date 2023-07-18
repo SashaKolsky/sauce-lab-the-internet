@@ -1,5 +1,6 @@
 package com.dotdash.takehome.tests;
 
+import com.dotdash.takehome.base.BaseTest;
 import com.dotdash.takehome.pages.TheInternetHomePage;
 import com.dotdash.takehome.utils.Utils;
 import org.junit.jupiter.api.Test;

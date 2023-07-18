@@ -1,5 +1,6 @@
 package com.dotdash.takehome.pages;
 
+import com.dotdash.takehome.base.BasePage;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

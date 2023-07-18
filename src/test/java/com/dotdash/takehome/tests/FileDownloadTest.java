@@ -1,5 +1,6 @@
 package com.dotdash.takehome.tests;
 
+import com.dotdash.takehome.base.BaseTest;
 import com.dotdash.takehome.pages.TheInternetHomePage;
 import com.dotdash.takehome.utils.Utils;
 import org.awaitility.Awaitility;
@@ -16,7 +17,7 @@ import static com.dotdash.takehome.utils.DriverManager.BROWSER_DOWNLOAD_FOLDER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("File Download page: /download")
-public class FileDownloadTest extends BaseTest{
+public class FileDownloadTest extends BaseTest {
 
     @Test
     public void fileDownloaded_withDriverOptions() {

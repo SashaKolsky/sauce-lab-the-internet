@@ -1,4 +1,4 @@
-package com.dotdash.takehome.tests;
+package com.dotdash.takehome.base;
 
 import com.dotdash.takehome.pages.TheInternetHomePage;
 import com.dotdash.takehome.utils.DriverManager;

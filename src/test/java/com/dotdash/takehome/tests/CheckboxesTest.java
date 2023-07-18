@@ -1,5 +1,6 @@
 package com.dotdash.takehome.tests;
 
+import com.dotdash.takehome.base.BaseTest;
 import com.dotdash.takehome.pages.CheckboxesAsListPage;
 import com.dotdash.takehome.pages.CheckboxesWithUpwardXPathPage;
 import com.dotdash.takehome.pages.TheInternetHomePage;
@@ -11,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Tag("simple")
 @DisplayName("Checkboxes page: /checkboxes")
-public class CheckboxesTest extends BaseTest{
+public class CheckboxesTest extends BaseTest {
 
     @Test
     @DisplayName("Verify checkboxes with list check and uncheck properly")

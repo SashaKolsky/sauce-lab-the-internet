@@ -1,5 +1,6 @@
 package com.dotdash.takehome.tests;
 
+import com.dotdash.takehome.base.BaseTest;
 import com.dotdash.takehome.pages.FloatingMenuPage;
 import com.dotdash.takehome.pages.TheInternetHomePage;
 import com.dotdash.takehome.utils.Utils;
@@ -9,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FloatingMenuTest extends BaseTest{
+public class FloatingMenuTest extends BaseTest {
 
     /**
      * Verify all menu buttons are inline, visible and their position changes with scroll.

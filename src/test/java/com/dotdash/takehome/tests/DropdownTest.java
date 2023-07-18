@@ -1,5 +1,6 @@
 package com.dotdash.takehome.tests;
 
+import com.dotdash.takehome.base.BaseTest;
 import com.dotdash.takehome.pages.DropdownPage;
 import com.dotdash.takehome.pages.TheInternetHomePage;
 import org.junit.jupiter.api.DisplayName;
@@ -8,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Dropdown List page: /dropdown")
-public class DropdownTest extends BaseTest{
+public class DropdownTest extends BaseTest {
 
     @Test
     @DisplayName("Verify value changes on select")

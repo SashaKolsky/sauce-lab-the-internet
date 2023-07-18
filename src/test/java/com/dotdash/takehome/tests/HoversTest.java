@@ -1,5 +1,6 @@
 package com.dotdash.takehome.tests;
 
+import com.dotdash.takehome.base.BaseTest;
 import com.dotdash.takehome.pages.HoversPage;
 import com.dotdash.takehome.pages.TheInternetHomePage;
 import com.dotdash.takehome.utils.ReplaceCamelCase;
@@ -12,7 +13,7 @@ import java.lang.reflect.Method;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayNameGeneration(ReplaceCamelCase.class)
-public class HoversTest extends BaseTest{
+public class HoversTest extends BaseTest {
 
     @CsvSource({"1, name: user1","2, name: user2","3, name: user3"})
     @ParameterizedTest(name = "When floating cursor over user {0}, hidden info for User {0} pops up")

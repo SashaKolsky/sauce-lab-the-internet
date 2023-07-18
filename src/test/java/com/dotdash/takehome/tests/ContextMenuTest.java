@@ -1,5 +1,6 @@
 package com.dotdash.takehome.tests;
 
+import com.dotdash.takehome.base.BaseTest;
 import com.dotdash.takehome.pages.TheInternetHomePage;
 import com.dotdash.takehome.utils.AfterTestCallback;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(AfterTestCallback.class)
 @DisplayName("Context Menu Page: /context_menu")
-public class ContextMenuTest extends BaseTest{
+public class ContextMenuTest extends BaseTest {
 
     @Tag("flaky")
     @Test

@@ -1,5 +1,6 @@
 package com.dotdash.takehome.tests;
 
+import com.dotdash.takehome.base.BaseTest;
 import com.dotdash.takehome.pages.DragAndDropPage;
 import com.dotdash.takehome.pages.TheInternetHomePage;
 import com.dotdash.takehome.utils.Utils;
@@ -9,7 +10,7 @@ import org.openqa.selenium.JavascriptExecutor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DragAndDropTest extends BaseTest{
+public class DragAndDropTest extends BaseTest {
 
     @Test
     @DisplayName("verifyContentSwitchesOnDropBothWays")

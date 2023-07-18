@@ -1,5 +1,6 @@
 package com.dotdash.takehome.pages;
 
+import com.dotdash.takehome.base.BasePage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
