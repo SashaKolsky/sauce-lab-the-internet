@@ -5,9 +5,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class IframePage extends BasePage {
-
-    public static final String PAGE_URL = "http://localhost:7080/iframe";
+public class WysiwygEditorPage extends BasePage {
 
     @FindBy(xpath = "//html[1]")
     private WebElement mainPage;
@@ -55,7 +53,7 @@ public class IframePage extends BasePage {
     @FindBy(xpath = "//div[@title='Heading 2']")
     private WebElement heading2Option;
 
-    public IframePage(WebDriver driver) {
+    public WysiwygEditorPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
@@ -65,13 +63,13 @@ public class IframePage extends BasePage {
         return textEditor;
     }
 
-    public IframePage prepTextEditor() {
+    public WysiwygEditorPage prepTextEditor() {
         waitForTextEditorToLoad();
         clearTextEditor();
         return this;
     }
 
-    private IframePage waitForTextEditorToLoad() {
+    private WysiwygEditorPage waitForTextEditorToLoad() {
         waitForElementToBeClickable(wysiwygIFrame);
         closeThisDomainIsNotRegisteredPopover();
         switchToIFrame();
@@ -79,7 +77,7 @@ public class IframePage extends BasePage {
         return this;
     }
 
-    private IframePage closeThisDomainIsNotRegisteredPopover() {
+    private WysiwygEditorPage closeThisDomainIsNotRegisteredPopover() {
         if (driver.findElements(By.xpath(popupCloseBtnXpath)).size() > 0) {
             popupCloseButton.click();
             //waitForElementToDisappear(notificationPopover);       // long wait with implicitWait
@@ -87,69 +85,69 @@ public class IframePage extends BasePage {
         return this;
     }
 
-    private IframePage clearTextEditor() {
+    private WysiwygEditorPage clearTextEditor() {
         textEditor.clear();
         return this;
     }
 
-    public IframePage enterText(String text) {
+    public WysiwygEditorPage enterText(String text) {
         textEditor.sendKeys(text);
         return this;
     }
 
-    public IframePage switchToIFrame() {
+    public WysiwygEditorPage switchToIFrame() {
         driver.switchTo().frame(wysiwygIFrame);
         return this;
     }
 
-    public IframePage switchToMain() {
+    public WysiwygEditorPage switchToMain() {
         driver.switchTo().parentFrame();
         return this;
     }
 
-    public IframePage boldButtonClick() {
+    public WysiwygEditorPage boldButtonClick() {
         switchToMain();
         boldButton.click();
         return this;
     }
 
-    public IframePage italicButtonClick() {
+    public WysiwygEditorPage italicButtonClick() {
         switchToMain();
         italicButton.click();
         return this;
     }
 
-    public IframePage formatsDropDownClick() {
+    public WysiwygEditorPage formatsDropDownClick() {
         formatsDropDown.click();
         return this;
     }
 
-    public IframePage headingsSubmenuClick() {
+    public WysiwygEditorPage headingsSubmenuClick() {
         headingsSubmenu.click();
         return this;
     }
 
-    public IframePage heading2OptionClick() {
+    public WysiwygEditorPage heading2OptionClick() {
         heading2Option.click();
         return this;
     }
 
-    public IframePage alignLeftButtonClick() {
+    public WysiwygEditorPage alignLeftButtonClick() {
         alignLeftButton.click();
         return this;
     }
 
-    public IframePage alignRightButtonClick() {
+    public WysiwygEditorPage alignRightButtonClick() {
         alignRightButton.click();
         return this;
     }
 
-    public IframePage alignCenterButtonClick() {
+    public WysiwygEditorPage alignCenterButtonClick() {
         alignCenterButton.click();
         return this;
     }
 
-    public IframePage selectPartOfText(String text) {
+    public WysiwygEditorPage selectPartOfText(String text) {
 
         // 1. get text length
         // 2. move to element with string
@@ -193,10 +191,9 @@ public class IframePage extends BasePage {
     }
 
     private String getSelectedTextWithJS(WebDriver driver) {
-        String selectedValue = (String) ((JavascriptExecutor) driver).executeScript(
+        return (String) ((JavascriptExecutor) driver).executeScript(
                 "return window.getSelection().toString();"
         );
-        return selectedValue;
     }
 
 }

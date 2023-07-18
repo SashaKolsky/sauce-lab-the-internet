@@ -7,8 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class TheInternetHomePage extends BasePage {
 
-    public static final String PAGE_URL = "http://localhost:7080";
-
     @FindBy(partialLinkText = "Form Authentication")
     WebElement loginPageLink;
 
@@ -116,10 +114,10 @@ public class TheInternetHomePage extends BasePage {
         return new FloatingMenuPage(driver);
     }
 
-    public IframePage wysiwygLinkClick() {
+    public WysiwygEditorPage wysiwygLinkClick() {
         framesLink.click();
         iFrameLink.click();
-        return new IframePage(driver);
+        return new WysiwygEditorPage(driver);
     }
 
     public HoversPage hoversLinkClick() {
