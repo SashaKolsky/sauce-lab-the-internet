@@ -32,8 +32,34 @@ jobs:
     - name: Print all modified test files
       run: git diff --name-only --diff-filter=ACMRT | grep src/test | grep -v -E "resources|pages" |  awk -F'/' '{print $NF}' | xargs | awk '{gsub(/ /,",")}1'
 
+    - name: Install chrome browser with Github Action
+    - uses: browser-actions/setup-chrome@v1
+
     - name: Build with Maven and Run only changed test files
       run: mvn -B package --file pom.xml -Dtest="$(git diff --name-only --diff-filter=ACMRT | grep src/test | grep -v -E "resources|pages" |  awk -F'/' '{print $NF}' | xargs | awk '{gsub(/ /,",")}1')" test
+
+    - name: Copy History
+      uses: actions/checkout@v3
+      if: always()
+      with:
+        ref: gh-pages
+        path: gh-pages
+
+    - name: Build Report
+      uses: simple-elf/allure-report-action@master
+      if: always()
+      with:
+        allure_results: target/allure-results
+        allure_history: allure-history
+        keep_reports: 20
+
+    - name: Publish Report
+      if: always()
+      uses: peaceiris/actions-gh-pages@v2
+      env:
+        PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: allure-history
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
