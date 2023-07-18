@@ -26,3 +26,7 @@ allure-results*/
 output/
 .allure/
 ajcore*
+
+src/test/java/com/dotdash/takehome/utils/ExpectedConditionUtils.java
+src/test/java/com/dotdash/takehome/utils/JUnitExecutionListener.java
+src/test/java/com/dotdash/takehome/utils/TraceHelper.java
