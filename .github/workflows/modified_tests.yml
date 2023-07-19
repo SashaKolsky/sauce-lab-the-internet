@@ -43,38 +43,46 @@ jobs:
       # with:
       #   since_last_remote_commit: true
 
-    - name: List all modified (both added and changed) files
-      run: |
 
+    - name: List all modified (both added and changed) files
+      id: find-modified-files
 #        If changes in common files (outside of takehome/pages and takehome/tests) are present
 #          => run all tests
 #        else run only changed test files, substituting Page files with corresponding Test files
 #        and removing duplicates
+      run: |
 
         RUN_ALL=false
         TESTFILES_TO_RUN=
         for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
           if [[ ! "$file" =~ "takehome/tests/" ]] && [[ ! "$file" =~ "takehome/pages/" ]]; then
-            echo "Changes in common files detected: $file\nPreparing to run all tests."
+            echo "Changes in common files detected $file. Preparing to run all tests."
             RUN_ALL=true
             TESTFILES_TO_RUN=
             break
           elif [[ "$file" =~ "takehome/pages/" ]]; then
-            echo "Found Page file: $file"
+            echo "Found Page file $file"
             file=$(echo "$file" | sed 's/.*\/\(.*\)Page/\1Test/')
           fi
           TESTFILES_TO_RUN="$TESTFILES_TO_RUN","$file"
         done
+        echo "RUN_ALL=$RUN_ALL" >> $GITHUB_OUTPUT
+        echo "TESTFILES_TO_RUN=${TESTFILES_TO_RUN:1}" >> $GITHUB_OUTPUT
+        
 
     - name: Run tests based on files that were updated
+      id: run-tests-based-on-modified-files
       run: |
-        if [[ RUN_ALL == true ]]; then
+        if [[ ${{ steps.find-modified-files.outputs.RUN_ALL }} == true ]]; then
           echo "Running all tests"
-          echo $(mvn -B package --file pom.xml)
+          mvn -B package --file pom.xml
         else
-          echo "Running selected tests: ${TESTFILES_TO_RUN:1} | sed 's/,/\n/'
-          echo $(mvn -B package --file pom.xml -Dtest=${TESTFILES_TO_RUN:1})
+          echo "Running selected tests ${{ steps.find-modified-files.outputs.TESTFILES_TO_RUN }} | sed 's/,/\n/'"
+          mvn -B package --file pom.xml -Dtest="${{ steps.find-modified-files.outputs.TESTFILES_TO_RUN }}" test
         fi
+
+#
+#
 
 #    - uses: browser-actions/setup-chrome@v1
 #
