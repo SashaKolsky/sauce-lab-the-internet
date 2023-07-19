@@ -54,7 +54,7 @@ jobs:
         for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
           echo "$file was changed"
           if [[ "$file" =~ "tests/" ]]; then
-            sed -n 's#/.*/##p' "$file" 
+            echo "$file" | sed -n 's#/.*/##p' 
           else
             echo "Not in tests/ package: $file"
           fi
