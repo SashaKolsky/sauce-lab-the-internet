@@ -8,8 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class FormAuthenticationPage extends BasePage {
 
-    public static final String PAGE_URL = "http://localhost:7080/login";
-
+    // element binding implied with field name = id of element on page
     WebElement username;
     WebElement password;
 
@@ -24,17 +23,10 @@ public class FormAuthenticationPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public void login(String userName, String pwd) {
+    public FormAuthenticationPage login(String userName, String pwd) {
         username.sendKeys(userName);
         password.sendKeys(pwd);
         submit.click();
-    }
-
-    public FormAuthenticationPage loginNegative(String userName, String pwd) {
-        username.sendKeys(userName);
-        password.sendKeys(pwd);
-        submit.click();
-
         return this;
     }
 
