@@ -1,0 +1,67 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Java CI with Maven
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  run_on_modified_files:
+
+    runs-on: ubuntu-latest
+
+    name: "Job name: run modified test files only"
+
+    steps:
+    - uses: actions/checkout@v3
+
+#    - name: Set up JDK 19
+#      uses: actions/setup-java@v3
+#      with:
+#        java-version: '19'
+#        distribution: 'temurin'
+#        cache: maven
+
+    - name: Print all modified test files
+      run: |
+        echo "List of files from git diff with awk: "
+        echo $(git diff --name-only --diff-filter=ACMRT | grep src/test | grep -v -E "resources|pages" |  awk -F'/' '{print $NF}' | xargs | awk '{gsub(/ /,",")}1')
+
+    # Example 1
+    - name: Get changed files
+      id: changed-files
+      uses: tj-actions/changed-files@v37
+
+      # To compare changes between the current commit and the last pushed remote commit set `since_last_remote_commit: true`. e.g
+      # with:
+      #   since_last_remote_commit: true
+
+    - name: List all changed files
+      run: |
+        for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          echo "$file was changed"
+        done
+
+    - name: List all modified (both added and changed) files
+      run: |
+        for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
+          echo "$file was changed"
+          if [[ "$file" =~ "tests/" ]]; then
+            sed -n 's#/.*/##p' "$file" 
+          else
+            echo "Not in tests/ package: $file"
+          fi
+        done
+
+#    - uses: browser-actions/setup-chrome@v1
+#
+#    - name: Build with Maven and Run only changed test files
+#      run: mvn -B package --file pom.xml
+#
