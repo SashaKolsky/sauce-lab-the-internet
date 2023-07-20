@@ -1,6 +1,7 @@
 package com.dotdash.takehome.pages;
 
 import com.dotdash.takehome.base.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,6 +24,7 @@ public class FormAuthenticationPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Fill out login form with username: {0}, password: {1}")
     public FormAuthenticationPage login(String userName, String pwd) {
         username.sendKeys(userName);
         password.sendKeys(pwd);
@@ -30,6 +32,7 @@ public class FormAuthenticationPage extends BasePage {
         return this;
     }
 
+    @Step("Get the flash banner text for assertion")
     public String flashMessage_getText() {
         return flashMessage.getText();
     }
