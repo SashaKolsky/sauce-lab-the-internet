@@ -14,9 +14,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <aspectj.version>1.9.19</aspectj.version>
-        <maven.surefire.latest>3.1.2</maven.surefire.latest>
-        <allure.junit5.latest>2.23.0</allure.junit5.latest>
-        <allure.maven.latest>2.12.0</allure.maven.latest>
+        <maven.surefire.version>3.1.2</maven.surefire.version>
+        <allure.junit5.version>2.23.0</allure.junit5.version>
+        <allure.maven.version>2.12.0</allure.maven.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <junit.jupiter.version>5.9.2</junit.jupiter.version>
     </properties>
@@ -77,8 +77,7 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
-            <version>${allure.junit5.latest}</version>
-            <scope>test</scope>
+            <version>${allure.junit5.version}</version>
         </dependency>
 
     </dependencies>
@@ -88,24 +87,23 @@
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
-                <version>${allure.maven.latest}</version>
+                <version>${allure.maven.version}</version>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven.surefire.latest}</version>
+                <version>${maven.surefire.version}</version>
                 <configuration>
+
                     <!-- include tags -->
                     <groups/>
                     <!-- exclude tags -->
                     <excludedGroups/>
-                    <forkCount>0</forkCount>
-                    <!-- needed for allure @steps -->
+<!--                    <forkCount>0</forkCount>-->
+
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-                    <testFailureIgnore>false</testFailureIgnore>
                     <systemProperties>
                         <property>
                             <name>junit.jupiter.extensions.autodetection.enabled</name>
