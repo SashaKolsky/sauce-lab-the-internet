@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import static io.qameta.allure.Allure.step;
+
 public class FormAuthenticationPage extends BasePage {
 
     // element binding implied with field name = id of element on page
@@ -24,11 +26,13 @@ public class FormAuthenticationPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    @Step("Fill out login form with username: {0}, password: {1}")
+    @Step("Fill out login form with username: {userName}, password: {pwd}")
     public FormAuthenticationPage login(String userName, String pwd) {
         username.sendKeys(userName);
         password.sendKeys(pwd);
-        submit.click();
+        step("Click submit button", () ->
+                submit.click()
+        );
         return this;
     }
 
