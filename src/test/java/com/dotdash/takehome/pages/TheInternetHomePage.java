@@ -1,6 +1,7 @@
 package com.dotdash.takehome.pages;
 
 import com.dotdash.takehome.base.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -55,6 +56,7 @@ public class TheInternetHomePage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Click Form Authentication Link in menu")
     public FormAuthenticationPage loginPageLinkClick(){
         loginPageLink.click();
         return new FormAuthenticationPage(driver);

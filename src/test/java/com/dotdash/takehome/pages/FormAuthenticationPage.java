@@ -1,15 +1,17 @@
 package com.dotdash.takehome.pages;
 
 import com.dotdash.takehome.base.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import static io.qameta.allure.Allure.step;
+
 public class FormAuthenticationPage extends BasePage {
 
-    public static final String PAGE_URL = "http://localhost:7080/login";
-
+    // element binding implied with field name = id of element on page
     WebElement username;
     WebElement password;
 
@@ -24,20 +26,17 @@ public class FormAuthenticationPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public void login(String userName, String pwd) {
+    @Step("Fill out login form with username: {userName}, password: {pwd}")
+    public FormAuthenticationPage login(String userName, String pwd) {
         username.sendKeys(userName);
         password.sendKeys(pwd);
-        submit.click();
-    }
-
-    public FormAuthenticationPage loginNegative(String userName, String pwd) {
-        username.sendKeys(userName);
-        password.sendKeys(pwd);
-        submit.click();
-
+        step("Click submit button", () ->
+                submit.click()
+        );
         return this;
     }
 
+    @Step("Get the flash banner text for assertion")
     public String flashMessage_getText() {
         return flashMessage.getText();
     }
