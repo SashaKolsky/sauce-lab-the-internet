@@ -65,8 +65,10 @@ public class DriverManager {
             chromeOptions.addArguments("--headless=new");
         }
         chromeOptions.addArguments("--remote-allow-origins=*");
-        chromeOptions.addArguments("--window-size=");
-
+        String windowSize = getProjectProperty("window-size");
+        if (windowSize.length() > 3) {
+            chromeOptions.addArguments("--window-size=" + windowSize);
+        }
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("download.default_directory", BROWSER_DOWNLOAD_FOLDER.toString());
         chromeOptions.setExperimentalOption("prefs", prefs);
