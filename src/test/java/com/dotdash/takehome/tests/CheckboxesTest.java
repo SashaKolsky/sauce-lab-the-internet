@@ -5,12 +5,11 @@ import com.dotdash.takehome.pages.CheckboxesAsListPage;
 import com.dotdash.takehome.pages.CheckboxesWithUpwardXPathPage;
 import com.dotdash.takehome.pages.TheInternetHomePage;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Tag("simple")
 @DisplayName("Checkboxes page: /checkboxes")
 public class CheckboxesTest extends BaseTest {
 
@@ -24,19 +23,20 @@ public class CheckboxesTest extends BaseTest {
         int numberOfCheckboxes = checkboxPage.numberOfCheckboxes();
         for(int i = 0; i < numberOfCheckboxes; i++) {
 
-            if (checkboxPage.checkboxStatus(i)) {
-                checkboxPage.clickCheckbox(i);
-                assertThat(checkboxPage.checkboxStatus(i)).isFalse();
+            int finalI = i;
+            step("verify that toggle for checkbox "+ i +" is working as expected", () -> {
+                boolean checkboxStatus = checkboxPage.isCheckboxSelected(finalI);
+                assertThat(checkboxPage
+                        .clickCheckbox(finalI)
+                        .isCheckboxSelected(finalI)
+                ).isNotEqualTo(checkboxStatus);
 
-                checkboxPage.clickCheckbox(i);
-                assertThat(checkboxPage.checkboxStatus(i)).isTrue();
-            } else {
-                checkboxPage.clickCheckbox(i);
-                assertThat(checkboxPage.checkboxStatus(i)).isTrue();
-
-                checkboxPage.clickCheckbox(i);
-                assertThat(checkboxPage.checkboxStatus(i)).isFalse();
-            }
+                checkboxStatus = checkboxPage.isCheckboxSelected(finalI);
+                assertThat(checkboxPage
+                        .clickCheckbox(finalI)
+                        .isCheckboxSelected(finalI)
+                ).isNotEqualTo(checkboxStatus);
+            });
         }
     }
 
@@ -48,14 +48,33 @@ public class CheckboxesTest extends BaseTest {
                 new TheInternetHomePage(getDriver())
                         .altCheckboxesPageLinkClick();
 
-        boolean checkbox1Status = checkboxPage.getCheckbox1Status();
-        boolean checkbox2Status = checkboxPage.getCheckbox2Status();
+        final String textForCheckbox1 = "checkbox 1";
+        final String textForCheckbox2 = "checkbox 2";
 
-        assertThat(checkboxPage.toggleCheckbox1()).isNotEqualTo(checkbox1Status);
-        assertThat(checkboxPage.toggleCheckbox2()).isNotEqualTo(checkbox2Status);
+        step("assert that clicking checkbox changes its state", () -> {
+            boolean checkbox1Status = checkboxPage.getStateOfCheckboxWithText(textForCheckbox1);
+            boolean checkbox2Status = checkboxPage.getStateOfCheckboxWithText(textForCheckbox2);
 
-        assertThat(checkboxPage.toggleCheckbox1()).isEqualTo(checkbox1Status);
-        assertThat(checkboxPage.toggleCheckbox2()).isEqualTo(checkbox2Status);
+            assertThat(checkboxPage.toggleCheckboxWithText(textForCheckbox1)).isNotEqualTo(checkbox1Status);
+            assertThat(checkboxPage.toggleCheckboxWithText(textForCheckbox2)).isNotEqualTo(checkbox2Status);
+
+            checkbox1Status = checkboxPage.getStateOfCheckboxWithText(textForCheckbox1);
+            checkbox2Status = checkboxPage.getStateOfCheckboxWithText(textForCheckbox2);
+
+            assertThat(checkboxPage.toggleCheckboxWithText(textForCheckbox1)).isNotEqualTo(checkbox1Status);
+            assertThat(checkboxPage.toggleCheckboxWithText(textForCheckbox2)).isNotEqualTo(checkbox2Status);
+        });
+
+        step("assert that clicking on one checkbox doesn't change the state of the other", () -> {
+            boolean checkbox2Status = checkboxPage.getStateOfCheckboxWithText(textForCheckbox2);
+            checkboxPage.toggleCheckboxWithText(textForCheckbox1);
+            assertThat(checkboxPage.getStateOfCheckboxWithText(textForCheckbox2)).isEqualTo(checkbox2Status);
+
+            boolean checkbox1Status = checkboxPage.getStateOfCheckboxWithText(textForCheckbox1);
+            checkboxPage.toggleCheckboxWithText(textForCheckbox2);
+            assertThat(checkboxPage.getStateOfCheckboxWithText(textForCheckbox1)).isEqualTo(checkbox1Status);
+        });
+
     }
 
 }
