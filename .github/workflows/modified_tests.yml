@@ -56,6 +56,8 @@ jobs:
           elif [[ "$file" =~ "takehome/pages/" ]]; then
             echo "Found Page file $file"
             file=$(echo "$file" | sed 's/.*\/\(.*\)Page/\1Test/')
+          else
+            file=$(echo "$file" | sed 's/.*\/\(.*\)Test/\1Test/')
           fi
           TESTFILES_TO_RUN="$TESTFILES_TO_RUN","$file"
         done
