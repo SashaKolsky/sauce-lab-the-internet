@@ -28,7 +28,7 @@ public class CheckboxesAsListPage extends BasePage {
     }
 
     @Step("check status of checkbox with index {index}")
-    public boolean checkboxStatus(int index) {
+    public boolean isCheckboxSelected(int index) {
         return checkboxes.get(index).isSelected();
     }
 
