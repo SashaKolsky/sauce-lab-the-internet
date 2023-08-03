@@ -23,18 +23,18 @@ public class CheckboxesTest extends BaseTest {
         int numberOfCheckboxes = checkboxPage.numberOfCheckboxes();
         for(int i = 0; i < numberOfCheckboxes; i++) {
 
-            int finalI = i;
+            int finali = i;
             step("verify that toggle for checkbox "+ i +" is working as expected", () -> {
-                boolean checkboxStatus = checkboxPage.isCheckboxSelected(finalI);
+                boolean checkboxStatus = checkboxPage.isCheckboxSelected(finali);
                 assertThat(checkboxPage
-                        .clickCheckbox(finalI)
-                        .isCheckboxSelected(finalI)
+                        .clickCheckbox(finali)
+                        .isCheckboxSelected(finali)
                 ).isNotEqualTo(checkboxStatus);
 
-                checkboxStatus = checkboxPage.isCheckboxSelected(finalI);
+                checkboxStatus = checkboxPage.isCheckboxSelected(finali);
                 assertThat(checkboxPage
-                        .clickCheckbox(finalI)
-                        .isCheckboxSelected(finalI)
+                        .clickCheckbox(finali)
+                        .isCheckboxSelected(finali)
                 ).isNotEqualTo(checkboxStatus);
             });
         }
