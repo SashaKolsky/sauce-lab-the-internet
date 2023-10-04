@@ -1,5 +1,6 @@
 package com.dotdash.takehome.tests;
 
+import com.codeborne.selenide.Condition;
 import com.dotdash.takehome.base.BaseTest;
 import com.dotdash.takehome.pages.DragAndDropPage;
 import com.dotdash.takehome.pages.TheInternetHomePage;
@@ -38,10 +39,31 @@ public class DragAndDropTest extends BaseTest {
         });
 
         // Second Drag & Drop (Reverse)
-        js. executeScript(script, dndPage.getColumnB(), dndPage.getColumnA());
-        assertThat(dndPage.getColumnAHeaderText()).isEqualTo("A");
-        assertThat(dndPage.getColumnBHeaderText()).isEqualTo("B");
+        step("Reverse: Drag column B back to column A", () -> {
+            js. executeScript(script, dndPage.getColumnB(), dndPage.getColumnA());
+        });
+        step("Verify Header A is in column-a; Header B is in column-b", () -> {
+            assertThat(dndPage.getColumnAHeaderText()).isEqualTo("A");
+            assertThat(dndPage.getColumnBHeaderText()).isEqualTo("B");
+        });
+    }
 
+    @Test
+    @DisplayName("Verify drag and drop with Selenide")
+    void verifyDragAndDropWithSelenide() {
+        open("https://the-internet.herokuapp.com/drag_and_drop");
+
+        // First Drag & Drop
+        $("#column-a").shouldHave(Condition.exactText("A"));
+        $("#column-b").shouldHave(Condition.exactText("B"));
+        $("#column-a").dragAndDropTo("#column-b");
+        $("#column-a").shouldHave(Condition.exactText("B"));
+        $("#column-b").shouldHave(Condition.exactText("A"));
+
+        // Second Drag & Drop (Reverse)
+        $("#column-b").dragAndDropTo("#column-a");
+        $("#column-a").shouldHave(Condition.exactText("A"));
+        $("#column-b").shouldHave(Condition.exactText("B"));
     }
 
 }
