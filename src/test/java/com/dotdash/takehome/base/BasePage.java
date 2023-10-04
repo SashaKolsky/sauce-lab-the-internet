@@ -25,10 +25,12 @@ public class BasePage {
     static {
         try {
             String hostname = getProjectProperty("hostname");
-            String port = (getProjectProperty("port").trim().length() > 0)
+            String port = (!getProjectProperty("port").trim().isEmpty())
                     ? ":"+ getProjectProperty("port")
                     : "";
-            String url = String.join("", "http://", hostname, port);
+            String url = (hostname.contains("http"))
+                    ? hostname
+                    : String.join("", "http://", hostname, port);
             BASE_URL = new URL(url);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
@@ -67,6 +69,6 @@ public class BasePage {
         }
         List<WebElement> elements = driver.findElements(locator);
 
-        return elements.size() == 0 || !elements.get(0).isDisplayed();
+        return elements.isEmpty() || !elements.get(0).isDisplayed();
     }
 }
