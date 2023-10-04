@@ -70,7 +70,7 @@ public class DataTableSteps {
 
     private void sortListData(List<TableRecord> list, String tableHeader, boolean isReverse) {
         tableHeader = tableHeader.toLowerCase().replaceAll("\"", "");
-        Comparator<TableRecord> comparator = null;
+        Comparator<TableRecord> comparator;
         switch (tableHeader) {
             case "first name" -> comparator = Comparator.comparing(TableRecord::firstName);
             case "last name" -> comparator = Comparator.comparing(TableRecord::lastName);
